@@ -2,7 +2,6 @@ package christmas.service;
 
 import christmas.dto.OrderMenu;
 import christmas.service.exception.MenuNotFoundException;
-import christmas.utils.message.ExceptionMessage;
 import java.util.List;
 
 public class OrderValidator {
@@ -21,7 +20,7 @@ public class OrderValidator {
         for (OrderMenu orderMenu : orderMenus) {
             String orderMenuName = orderMenu.getMenuName();
             if (Menu.find(orderMenuName).isEmpty()) {
-                throw new MenuNotFoundException(ExceptionMessage.MESSAGE.getError());
+                throw new MenuNotFoundException();
             }
         }
     }
