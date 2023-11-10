@@ -1,5 +1,9 @@
 package christmas.service;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 public enum Menu {
     MUSHROOM_SOUP("양송이수프", 6000),
     TAPAS("타파스", 5500),
@@ -17,12 +21,24 @@ public enum Menu {
     RED_WINE("레드와인", 60000),
     CHAMPAGNE("샴페인", 25000);
 
+    private static final Map<String, Menu> cachedMenu = new HashMap<>();
+
     private final String name;
     private final int price;
 
     Menu(String name, int price) {
         this.name = name;
         this.price = price;
+    }
+
+    static {
+        for (Menu menu : values()) {
+            cachedMenu.put(menu.getName(), menu);
+        }
+    }
+
+    public static Optional<Menu> find(String menuName) {
+        return Optional.ofNullable(cachedMenu.get(menuName));
     }
 
     public String getName() {
