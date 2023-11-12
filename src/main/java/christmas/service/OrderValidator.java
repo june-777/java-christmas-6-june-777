@@ -77,4 +77,10 @@ public class OrderValidator {
             throw new ExceedTotalMenuCountException();
         }
     }
+
+    private int calculateTotalOrderCount(List<OrderMenu> orderMenus) {
+        return orderMenus.stream()
+                .map(OrderMenu::getOrderCount)
+                .reduce(0, Integer::sum);
+    }
 }
