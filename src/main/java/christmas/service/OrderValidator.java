@@ -1,6 +1,7 @@
 package christmas.service;
 
 import christmas.dto.OrderMenu;
+import christmas.service.exception.AllMenuBeverageException;
 import christmas.service.exception.DuplicateMenuException;
 import christmas.service.exception.MenuNotFoundException;
 import java.util.List;
@@ -11,15 +12,17 @@ import java.util.stream.Collectors;
 public class OrderValidator {
 
     /**
-     * @throws IllegalArgumentException
-     * @throws MenuNotFoundException:   없는 메뉴인 경우
-     * @throws DuplicateMenuException:  중복 메뉴가 존재하는 경우
+     * @throws IllegalArgumentException:
+     * @throws MenuNotFoundException:    없는 메뉴인 경우
+     * @throws DuplicateMenuException:   중복 메뉴가 존재하는 경우
+     * @throws AllMenuBeverageException: 음료수만 주문한 경우
      */
     public void validateOrder(List<OrderMenu> orderMenus) {
         validateExistMenu(orderMenus);
         // TODO: 중복 메뉴 존재여부 검증
         validateDuplicateMenu(orderMenus);
         // TODO: 음료만 주문했는지 검증
+        validateOnlyDrinkMenu(orderMenus);
         // TODO: 총 주문 개수가 20개 초과인지 검증
     }
 
@@ -45,5 +48,13 @@ public class OrderValidator {
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toSet());
+    }
+
+    private void validateOnlyDrinkMenu(List<OrderMenu> orderMenus) {
+        boolean allMenuBeverage = isAllMenuBeverage(orderMenus);
+
+        if (allMenuBeverage) {
+            throw new AllMenuBeverageException();
+        }
     }
 }
