@@ -16,4 +16,12 @@ public class OrderMenu {
     public int getOrderCount() {
         return orderCount;
     }
+
+    @Override
+    public String toString() {
+        return "OrderMenu{" +
+                "menuName='" + menuName + '\'' +
+                ", orderCount=" + orderCount +
+                '}';
+    }
 }
