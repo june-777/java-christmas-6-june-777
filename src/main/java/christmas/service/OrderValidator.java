@@ -57,4 +57,14 @@ public class OrderValidator {
             throw new AllMenuBeverageException();
         }
     }
+
+    private boolean isAllMenuBeverage(List<OrderMenu> orderMenus) {
+        return orderMenus.stream()
+                .map(OrderMenu::getMenuName)
+                .map(Menu::find)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(Menu::getMenuType)
+                .allMatch(menuType -> menuType == MenuType.BEVERAGE);
+    }
 }
