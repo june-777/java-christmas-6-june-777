@@ -4,7 +4,9 @@ import christmas.dto.OrderMenu;
 import christmas.service.exception.DuplicateMenuException;
 import christmas.service.exception.MenuNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class OrderValidator {
 
@@ -34,5 +36,14 @@ public class OrderValidator {
         if (orderMenus.size() != uniqueOrderMenus.size()) {
             throw new DuplicateMenuException();
         }
+    }
+
+    private static Set<Menu> createUniqueOrderMenus(List<OrderMenu> orderMenus) {
+        return orderMenus.stream()
+                .map(OrderMenu::getMenuName)
+                .map(Menu::find)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toSet());
     }
 }
