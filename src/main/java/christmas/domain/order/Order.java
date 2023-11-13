@@ -4,10 +4,12 @@ import java.util.List;
 
 public class Order {
     private final List<OrderItem> order;
+    private final OrderDay day;
 
-    public Order(List<OrderItem> order) {
+    public Order(List<OrderItem> order, int day) {
         OrderValidator.validate(order);
         this.order = order;
+        this.day = new OrderDay(day);
     }
 
     public int getTotalOrderPrice() {
@@ -16,5 +18,9 @@ public class Order {
             sum += orderItem.getPrice();
         }
         return sum;
+    }
+
+    public int getDay() {
+        return day.getDay();
     }
 }
