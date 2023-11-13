@@ -1,8 +1,7 @@
-package christmas.service;
+package christmas.domain.order;
 
 import christmas.domain.exception.MenuNotFoundException;
 import christmas.domain.exception.OutOfRangeOrderItemCountException;
-import christmas.domain.order.OrderItem;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
