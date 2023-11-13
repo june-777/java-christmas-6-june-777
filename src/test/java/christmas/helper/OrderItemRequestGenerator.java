@@ -136,4 +136,21 @@ public class OrderItemRequestGenerator {
                 new OrderItemRequest("해산물파스타", 1));
         return Stream.of(orderItems);
     }
+
+    public static Stream<List<OrderItemRequest>> createSuccess() {
+        List<OrderItemRequest> orderItems = List.of(
+                new OrderItemRequest("양송이수프", 1),
+                new OrderItemRequest("타파스", 1),
+                new OrderItemRequest("시저샐러드", 1),
+                new OrderItemRequest("티본스테이크", 1),
+                new OrderItemRequest("바비큐립", 1),
+                new OrderItemRequest("해산물파스타", 1),
+                new OrderItemRequest("크리스마스파스타", 1),
+                new OrderItemRequest("초코케이크", 1),
+                new OrderItemRequest("아이스크림", 1),
+                new OrderItemRequest("제로콜라", 1),
+                new OrderItemRequest("레드와인", 1),
+                new OrderItemRequest("샴페인", 9));
+        return Stream.of(orderItems);
+    }
 }
