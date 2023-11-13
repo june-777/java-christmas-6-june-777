@@ -1,6 +1,5 @@
-package christmas.service;
+package christmas.domain;
 
-import christmas.domain.Menu;
 import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
