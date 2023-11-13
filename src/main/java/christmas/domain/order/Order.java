@@ -9,4 +9,12 @@ public class Order {
         OrderValidator.validate(order);
         this.order = order;
     }
+
+    public int getTotalOrderPrice() {
+        int sum = 0;
+        for (OrderItem orderItem : order) {
+            sum += orderItem.getPrice();
+        }
+        return sum;
+    }
 }
