@@ -44,8 +44,8 @@ public class OrderItem {
         return menu.getName();
     }
 
-    public int getMenuPrice() {
-        return menu.getPrice();
+    public int getPrice() {
+        return menu.getPrice() * count;
     }
 
     public int getCount() {
