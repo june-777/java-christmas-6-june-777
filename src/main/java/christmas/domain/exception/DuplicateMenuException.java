@@ -1,4 +1,4 @@
-package christmas.service.exception;
+package christmas.domain.exception;
 
 import christmas.utils.message.ExceptionMessage;
 
