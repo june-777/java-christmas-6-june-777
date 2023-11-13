@@ -1,5 +1,6 @@
 package christmas.domain.order;
 
+import christmas.domain.MenuType;
 import java.util.List;
 
 public class Order {
@@ -22,5 +23,15 @@ public class Order {
 
     public int getDay() {
         return day.getDay();
+    }
+
+    public int getSpecificMenuOrderCount(MenuType menuType) {
+        int count = 0;
+        for (OrderItem orderItem : order) {
+            if (orderItem.isSameMenuType(menuType)) {
+                count += orderItem.getCount();
+            }
+        }
+        return count;
     }
 }
