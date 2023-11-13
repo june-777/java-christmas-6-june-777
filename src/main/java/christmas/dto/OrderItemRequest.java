@@ -1,10 +1,10 @@
 package christmas.dto;
 
-public class OrderMenu {
+public class OrderItemRequest {
     private final String menuName;
     private final int orderCount;
 
-    public OrderMenu(String menuName, int orderCount) {
+    public OrderItemRequest(String menuName, int orderCount) {
         this.menuName = menuName;
         this.orderCount = orderCount;
     }
@@ -19,7 +19,7 @@ public class OrderMenu {
 
     @Override
     public String toString() {
-        return "OrderMenu{" +
+        return "OrderItemRequest{" +
                 "menuName='" + menuName + '\'' +
                 ", orderCount=" + orderCount +
                 '}';
