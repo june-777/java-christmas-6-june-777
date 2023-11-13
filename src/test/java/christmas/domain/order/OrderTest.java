@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class OrderTest {
 
-    private static final String TEST_HELPER_PATH = "christmas.helper.TestHelper";
+    private static final String ORDER_ITEMS_GENERATOR_PATH = "christmas.helper.OrderItemsGenerator";
 
     @Nested
     @DisplayName("총 주문 금액을 계산하는 기능 테스트")
@@ -27,10 +27,10 @@ class OrderTest {
         }
 
         @ParameterizedTest
-        @MethodSource(TEST_HELPER_PATH + "#createSuccessOrder")
+        @MethodSource(ORDER_ITEMS_GENERATOR_PATH + "#createSuccessOrder")
         @DisplayName("주문 메뉴 총 가격 테스트")
-        void totalPriceTest(List<OrderItem> orderItems) {
-            Order order = new Order(orderItems);
+        void totalPriceTest(List<OrderItem> orderItem) {
+            Order order = new Order(orderItem);
             int expectedPrice = 496500;
             Assertions.assertThat(order.getTotalOrderPrice()).isEqualTo(expectedPrice);
         }
