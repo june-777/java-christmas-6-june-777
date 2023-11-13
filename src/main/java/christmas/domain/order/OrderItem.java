@@ -1,6 +1,7 @@
 package christmas.domain.order;
 
 import christmas.domain.Menu;
+import christmas.domain.MenuType;
 import christmas.domain.exception.MenuNotFoundException;
 import christmas.domain.exception.OutOfRangeOrderItemCountException;
 
@@ -36,8 +37,12 @@ public class OrderItem {
         }
     }
 
-    private static boolean isOutOfRange(int count) {
+    private boolean isOutOfRange(int count) {
         return count < MIN_COUNT || count > MAX_COUNT;
+    }
+
+    public boolean isSameMenuType(MenuType menuType) {
+        return menu.getMenuType() == menuType;
     }
 
     public String getMenuName() {
