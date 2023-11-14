@@ -1,5 +1,7 @@
-package christmas.dto;
+package christmas.utils.mapper;
 
+import christmas.dto.request.OrderItemRequest;
+import christmas.dto.request.OrderRequest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
