@@ -3,17 +3,20 @@ package christmas.domain;
 import christmas.service.event.EventDayCalculator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public enum EventType {
-    CHRISTMAS(EventDayCalculator.christmasDay()),
-    WEEKDAY(EventDayCalculator.weekDay()),
-    WEEKEND(EventDayCalculator.weekEnd()),
-    SPECIAL(EventDayCalculator.specialDay());
+    CHRISTMAS(EventDayCalculator.christmasDay(), todo -> todo),
+    WEEKDAY(EventDayCalculator.weekDay(), todo -> todo),
+    WEEKEND(EventDayCalculator.weekEnd(), todo -> todo),
+    SPECIAL(EventDayCalculator.specialDay(), todo -> todo);
 
     private final List<Integer> possibleDays;
+    private final Function<Integer, Integer> calculator;
 
-    EventType(List<Integer> possibleDays) {
+    EventType(List<Integer> possibleDays, Function<Integer, Integer> calculator) {
         this.possibleDays = possibleDays;
+        this.calculator = calculator;
     }
 
     public static List<EventType> getApplicableEventTypes(int targetDay) {
