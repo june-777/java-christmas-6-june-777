@@ -41,6 +41,13 @@ public enum EventType {
         return applicableEventTypes;
     }
 
+    public int calculateDiscountAmount(int day, int calculateArgument) {
+        if (this.possibleDays.contains(day)) {
+            return calculator.apply(calculateArgument);
+        }
+        return 0;
+    }
+
     public List<Integer> getPossibleDays() {
         return possibleDays;
     }
