@@ -92,4 +92,14 @@ public class OrderItemsGenerator {
                 new OrderItem("샴페인", 9));
         return Stream.of(orderItem);
     }
+
+    public static Stream<List<OrderItem>> createManyDessertOrder() {
+        List<OrderItem> orderItem = List.of(
+                new OrderItem("양송이수프", 1),
+                new OrderItem("바비큐립", 1),
+                new OrderItem("초코케이크", 5),
+                new OrderItem("아이스크림", 11),
+                new OrderItem("레드와인", 1));
+        return Stream.of(orderItem);
+    }
 }
