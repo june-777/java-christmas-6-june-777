@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.function.Function;
 
 public enum EventType {
-    CHRISTMAS(EventDayCalculator.christmasDay(), todo -> todo),
+    CHRISTMAS(EventDayCalculator.christmasDay(), orderDay -> {
+        final int basicDiscountAmount = 1000;
+        final int discountAmountUnit = 100;
+        return basicDiscountAmount + discountAmountUnit * (orderDay - 1);
+    }),
     WEEKDAY(EventDayCalculator.weekDay(), todo -> todo),
     WEEKEND(EventDayCalculator.weekEnd(), todo -> todo),
     SPECIAL(EventDayCalculator.specialDay(), todo -> todo);
