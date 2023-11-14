@@ -1,9 +1,9 @@
-package christmas.service;
+package christmas.service.order;
 
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItem;
-import christmas.dto.OrderItemRequest;
-import christmas.dto.OrderRequest;
+import christmas.dto.request.OrderItemRequest;
+import christmas.dto.request.OrderRequest;
 import java.util.ArrayList;
 import java.util.List;
 
