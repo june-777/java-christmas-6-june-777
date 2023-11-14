@@ -16,4 +16,11 @@ public class DiscountInformation {
         }
         return totalDiscountAmount;
     }
+
+    public int getDiscountAmount(EventType eventType) {
+        if (eachEventDiscountAmounts.containsKey(eventType)) {
+            return eachEventDiscountAmounts.get(eventType);
+        }
+        return 0;
+    }
 }
