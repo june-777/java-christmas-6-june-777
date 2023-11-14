@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.dto.request;
 
 public class OrderItemRequest {
     private final String menuName;

@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.dto.request;
 
 import java.util.List;
 
