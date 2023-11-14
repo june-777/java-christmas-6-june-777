@@ -250,6 +250,47 @@ class EventTypeTest {
         }
     }
 
+    @Nested
+    @DisplayName("특별 할인 이벤트를 적용하려는데")
+    class SpecialDayDiscountTest {
+
+        @DisplayName("적용 가능 날짜가 아니라면 0원이 할인된다.")
+        @ParameterizedTest
+        @CsvSource(value = {"1:티본스테이크-1", "2:바비큐립-2",
+                "4:해산물파스타-4", "9:크리스마스파스타-1",
+                "11:티본스테이크-4,해산물파스타-1", "16:바비큐립-1,크리스마스파스타-4",
+                "18:티본스테이크-8,해산물파스타-1,제로콜라-1", "23:크리스마스파스타-9,양송이수프-1",
+                "26:티본스테이크-4,타파스-2", "29:레드와인-1,바비큐립-2", "30:티본스테이크-1"}, delimiter = ':')
+        void notSpecialDay(int day, String menuForm) {
+            // given
+            OrderRequest orderRequest = OrderRequestMapper.fromMenuForm(menuForm, day);
+            Order order = orderService.createOrder(orderRequest);
+            int expectedDiscountAmount = 0;
+            int anything = 0;
+            // when
+            int discountAmount = EventType.SPECIAL.calculateDiscountAmount(day, anything);
+            // then
+            Assertions.assertThat(discountAmount).isEqualTo(expectedDiscountAmount);
+        }
+
+        @DisplayName("적용 가능 날짜라면 -1000원이 할인된다.")
+        @ParameterizedTest
+        @CsvSource(value = {"3:티본스테이크-1", "10:바비큐립-2",
+                "17:해산물파스타-4", "24:크리스마스파스타-1",
+                "25:티본스테이크-4,해산물파스타-1", "31:바비큐립-1,크리스마스파스타-4"}, delimiter = ':')
+        void specialDay(int day, String menuForm) {
+            // given
+            OrderRequest orderRequest = OrderRequestMapper.fromMenuForm(menuForm, day);
+            Order order = orderService.createOrder(orderRequest);
+            int expectedDiscountAmount = -1000;
+            int anything = 0;
+            // when
+            int discountAmount = EventType.SPECIAL.calculateDiscountAmount(day, anything);
+            // then
+            Assertions.assertThat(discountAmount).isEqualTo(expectedDiscountAmount);
+        }
+    }
+
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 8, 9, 15, 16, 22, 23, 29, 30})
     @DisplayName("할인 가능 이벤트 - 주말")
