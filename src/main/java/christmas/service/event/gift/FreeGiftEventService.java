@@ -9,7 +9,7 @@ public class FreeGiftEventService {
     private static final int APPLICABLE_MIN_AMOUNT = 120000;
     private static final int freeGiftCount = 1;
 
-    public Optional<FreeGift> applyGiftEvent(int totalOrderPrice) {
+    public Optional<FreeGift> calculateGiftEvent(int totalOrderPrice) {
         if (totalOrderPrice >= APPLICABLE_MIN_AMOUNT) {
             return Optional.of(new FreeGift(Menu.CHAMPAGNE, freeGiftCount));
         }

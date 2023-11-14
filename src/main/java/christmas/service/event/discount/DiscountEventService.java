@@ -1,7 +1,7 @@
 package christmas.service.event.discount;
 
-import christmas.domain.DiscountInformation;
 import christmas.domain.EventType;
+import christmas.domain.event.DiscountInformation;
 import christmas.domain.order.Order;
 import christmas.service.event.discount.executor.ChristmasDiscountExecutor;
 import christmas.service.event.discount.executor.DiscountExecutor;
@@ -24,7 +24,7 @@ public class DiscountEventService {
         this.discountExecutor = discountExecutor;
     }
 
-    public DiscountInformation applyDiscountEvent(Order order) {
+    public DiscountInformation calculateDiscountEvent(Order order) {
         List<EventType> applicableEventTypes = EventType.getApplicableEventTypes(order.getDay());
         EnumMap<EventType, Integer> discounts = updateEachEventDiscount(order, applicableEventTypes);
         return new DiscountInformation(discounts);
