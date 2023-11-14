@@ -1,22 +1,38 @@
 package christmas.service.event;
 
+import christmas.domain.event.DiscountInformation;
+import christmas.domain.event.FreeGift;
 import christmas.domain.order.Order;
-import christmas.dto.EventResultResponse;
+import christmas.service.event.discount.DiscountEventService;
+import christmas.service.event.gift.FreeGiftEventService;
 import java.util.Optional;
 
 public class EventService {
 
-    private static final int MIN_TOTAL_PRICE = 10000;
+    private static final int APPLICABLE_MIN_TOTAL_PRICE = 10000;
+    private final DiscountEventService discountEventService;
+    private final FreeGiftEventService freeGiftEventService;
 
-    public Optional<EventResultResponse> applyEvent(Order order) {
+    public EventService(DiscountEventService discountEventService, FreeGiftEventService freeGiftEventService) {
+        this.discountEventService = discountEventService;
+        this.freeGiftEventService = freeGiftEventService;
+    }
+
+    public Optional<DiscountInformation> applyDiscountEvent(Order order) {
         if (cantApplyEvent(order)) {
             return Optional.empty();
         }
-        // TODO:
-        return null;
+        return Optional.of(discountEventService.calculateDiscountEvent(order));
+    }
+
+    public Optional<FreeGift> applyFreeGiftEvent(Order order) {
+        if (cantApplyEvent(order)) {
+            return Optional.empty();
+        }
+        return freeGiftEventService.calculateGiftEvent(order.getTotalOrderPrice());
     }
 
     private boolean cantApplyEvent(Order order) {
-        return order.getTotalOrderPrice() < MIN_TOTAL_PRICE;
+        return order.getTotalOrderPrice() < APPLICABLE_MIN_TOTAL_PRICE;
     }
 }
