@@ -1,9 +1,9 @@
 package christmas.domain.exception;
 
-import christmas.utils.message.ExceptionMessage;
+import christmas.utils.message.OrderExceptionMessage;
 
 public class MenuNotFoundException extends IllegalArgumentException {
     public MenuNotFoundException() {
-        super(ExceptionMessage.MESSAGE.getError());
+        super(OrderExceptionMessage.MESSAGE.getError());
     }
 }

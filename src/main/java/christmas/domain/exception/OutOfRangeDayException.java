@@ -1,9 +1,9 @@
 package christmas.domain.exception;
 
-import christmas.utils.message.ExceptionMessage;
+import christmas.utils.message.DateExceptionMessage;
 
 public class OutOfRangeDayException extends IllegalArgumentException {
     public OutOfRangeDayException() {
-        super(ExceptionMessage.MESSAGE.getError());
+        super(DateExceptionMessage.MESSAGE.getError());
     }
 }
