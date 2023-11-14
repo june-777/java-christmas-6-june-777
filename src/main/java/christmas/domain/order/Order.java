@@ -1,6 +1,7 @@
 package christmas.domain.order;
 
 import christmas.domain.MenuType;
+import java.util.Collections;
 import java.util.List;
 
 public class Order {
@@ -33,6 +34,10 @@ public class Order {
             }
         }
         return count;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return Collections.unmodifiableList(order);
     }
 
     @Override
