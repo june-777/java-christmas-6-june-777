@@ -1,9 +1,9 @@
 package christmas.domain.exception;
 
-import christmas.utils.message.ExceptionMessage;
+import christmas.utils.message.OrderExceptionMessage;
 
 public class DuplicateMenuException extends IllegalArgumentException {
     public DuplicateMenuException() {
-        super(ExceptionMessage.MESSAGE.getError());
+        super(OrderExceptionMessage.MESSAGE.getError());
     }
 }
