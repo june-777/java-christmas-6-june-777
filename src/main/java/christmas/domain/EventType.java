@@ -19,7 +19,9 @@ public enum EventType {
         final int discountAmountUnit = 2023;
         return discountAmountUnit * mainCourseCount;
     }),
-    SPECIAL(EventDayCalculator.specialDay(), todo -> todo);
+    SPECIAL(EventDayCalculator.specialDay(), anything -> {
+        return 1000;
+    });
 
     private final List<Integer> possibleDays;
     private final Function<Integer, Integer> calculator;
