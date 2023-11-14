@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.service.event.EventDayCalculator;
+import java.util.ArrayList;
 import java.util.List;
 
 public enum EventType {
@@ -13,6 +14,16 @@ public enum EventType {
 
     EventType(List<Integer> possibleDays) {
         this.possibleDays = possibleDays;
+    }
+
+    public static List<EventType> getApplicableEventTypes(int targetDay) {
+        List<EventType> applicableEventTypes = new ArrayList<>();
+        for (EventType eventType : values()) {
+            if (eventType.possibleDays.contains(targetDay)) {
+                applicableEventTypes.add(eventType);
+            }
+        }
+        return applicableEventTypes;
     }
 
     public List<Integer> getPossibleDays() {
