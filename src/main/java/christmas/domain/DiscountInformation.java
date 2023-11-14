@@ -8,4 +8,12 @@ public class DiscountInformation {
     public DiscountInformation(EnumMap<EventType, Integer> eachEventDiscountAmounts) {
         this.eachEventDiscountAmounts = eachEventDiscountAmounts;
     }
+
+    public int getTotalDiscountAmount() {
+        int totalDiscountAmount = 0;
+        for (Integer discountAmount : eachEventDiscountAmounts.values()) {
+            totalDiscountAmount += discountAmount;
+        }
+        return totalDiscountAmount;
+    }
 }
