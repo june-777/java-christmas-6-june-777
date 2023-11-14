@@ -29,5 +29,13 @@ public class DiscountEventService {
         EnumMap<EventType, Integer> discounts = updateEachEventDiscount(order, applicableEventTypes);
         return new DiscountInformation(discounts);
     }
-    
+
+    private EnumMap<EventType, Integer> updateEachEventDiscount(Order order, List<EventType> applicableEventTypes) {
+        EnumMap<EventType, Integer> discounts = new EnumMap<>(EventType.class);
+        for (EventType eventType : applicableEventTypes) {
+            DiscountExecutor executor = discountExecutor.get(eventType);
+            discounts.put(eventType, executor.execute(order));
+        }
+        return discounts;
+    }
 }
