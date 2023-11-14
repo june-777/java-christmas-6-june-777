@@ -9,18 +9,18 @@ public enum EventType {
     CHRISTMAS(EventDayCalculator.christmasDay(), orderDay -> {
         final int basicDiscountAmount = 1000;
         final int discountAmountUnit = 100;
-        return basicDiscountAmount + discountAmountUnit * (orderDay - 1);
+        return (basicDiscountAmount + discountAmountUnit * (orderDay - 1)) * -1;
     }),
     WEEKDAY(EventDayCalculator.weekDay(), dessertCount -> {
         final int discountAmountUnit = 2023;
-        return discountAmountUnit * dessertCount;
+        return (discountAmountUnit * dessertCount) * -1;
     }),
     WEEKEND(EventDayCalculator.weekEnd(), mainCourseCount -> {
         final int discountAmountUnit = 2023;
-        return discountAmountUnit * mainCourseCount;
+        return (discountAmountUnit * mainCourseCount) * -1;
     }),
     SPECIAL(EventDayCalculator.specialDay(), anything -> {
-        return 1000;
+        return -1000;
     });
 
     private final List<Integer> possibleDays;
