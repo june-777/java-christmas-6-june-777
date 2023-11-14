@@ -171,6 +171,85 @@ class EventTypeTest {
         }
     }
 
+    @Nested
+    @DisplayName("주말 할인 이벤트를 적용하려는데")
+    class WeekendDiscountTest {
+
+        @DisplayName("적용 가능 날짜가 아니라면 0원이 할인된다.")
+        @ParameterizedTest
+        @CsvSource(value = {"3:티본스테이크-1", "4:바비큐립-2",
+                "5:해산물파스타-4", "6:크리스마스파스타-1",
+                "7:티본스테이크-4,해산물파스타-1", "10:바비큐립-1,크리스마스파스타-4",
+                "11:티본스테이크-8,해산물파스타-1,제로콜라-1", "12:크리스마스파스타-9,양송이수프-1",
+                "21:티본스테이크-4,타파스-2", "28:레드와인-1,바비큐립-2",
+                "31:티본스테이크-1"}, delimiter = ':')
+        void notWeekend(int day, String menuForm) {
+            // given
+            OrderRequest orderRequest = OrderRequestMapper.fromMenuForm(menuForm, day);
+            Order order = orderService.createOrder(orderRequest);
+            int expectedDiscountAmount = 0;
+            // when
+            int discountAmount = EventType.WEEKEND.calculateDiscountAmount(day, day);
+            // then
+            Assertions.assertThat(discountAmount).isEqualTo(expectedDiscountAmount);
+        }
+
+        @DisplayName("디저트 개수가 없다면 0원이 할인된다.")
+        @ParameterizedTest
+        @CsvSource(value = {"1:양송이수프-1", "2:타파스-2",
+                "8:시저샐러드-4", "9:초코케이크-1",
+                "15:아이스크림-4", "16:양송이수프-1,초코케이크-1",
+                "22:타파스-1,제로콜라-8", "23:타파스-1,제로콜라-9",
+                "29:양송이수프-1,아이스크림-1,레드와인-1,타파스-2", "30:초코케이크-1,제로콜라-1"}, delimiter = ':')
+        void notExistDessertMenu(int day, String menuForm) {
+            // given
+            OrderRequest orderRequest = OrderRequestMapper.fromMenuForm(menuForm, day);
+            Order order = orderService.createOrder(orderRequest);
+            int dessertMenuCount = order.getSpecificMenuOrderCount(MenuType.MAIN_COURSE);
+            int expectedDiscountAmount = 0;
+            // when
+            int discountAmount = EventType.WEEKEND.calculateDiscountAmount(day, dessertMenuCount);
+            // then
+            Assertions.assertThat(discountAmount).isEqualTo(expectedDiscountAmount);
+        }
+
+        @DisplayName("여러 메뉴 중 메인 메뉴 개수가 4개라면 -8092원만큼 할인된다.")
+        @ParameterizedTest
+        @MethodSource(ORDER_ITEMS_GENERATOR_PATH + "#createSuccessOrder")
+        void weekDayDiscountAmount(List<OrderItem> orderItems) {
+            // given
+            List<Integer> weekDays = EventType.WEEKEND.getPossibleDays();
+            int expectedDiscountAmount = -8092;
+            for (Integer weekDay : weekDays) {
+                Order order = new Order(orderItems, weekDay);
+                EventType eventType = EventType.WEEKEND;
+                // when
+                int resultDiscountAmount = eventType.calculateDiscountAmount(weekDay,
+                        order.getSpecificMenuOrderCount(MenuType.MAIN_COURSE));
+                // then
+                Assertions.assertThat(resultDiscountAmount).isEqualTo(expectedDiscountAmount);
+            }
+        }
+
+        @DisplayName("메인 메뉴 개수만큼 할인된다.")
+        @ParameterizedTest
+        @CsvSource(value = {"1:-2023", "2:-4046", "3:-6069", "4:-8092", "5:-10115",
+                "6:-12138", "7:-14161", "8:-16184", "9:-18207", "10:-20230",
+                "11:-22253", "12:-24276", "13:-26299", "14:-28322", "15:-30345",
+                "16:-32368", "17:-34391", "18:-36414", "19:-38437", "20:-40460"}, delimiter = ':')
+        void weekEndDiscountAmountManyCase(int mainCourseCount, int expectedDiscountAmount) {
+            // given
+            List<Integer> weekEnds = EventType.WEEKEND.getPossibleDays();
+            for (Integer weekEnd : weekEnds) {
+                EventType eventType = EventType.WEEKEND;
+                // when
+                int resultDiscountAmount = eventType.calculateDiscountAmount(weekEnd, mainCourseCount);
+                // then
+                Assertions.assertThat(resultDiscountAmount).isEqualTo(expectedDiscountAmount);
+            }
+        }
+    }
+
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 8, 9, 15, 16, 22, 23, 29, 30})
     @DisplayName("할인 가능 이벤트 - 주말")
