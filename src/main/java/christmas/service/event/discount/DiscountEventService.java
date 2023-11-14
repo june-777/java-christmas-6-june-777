@@ -7,7 +7,7 @@ import christmas.service.event.discount.executor.ChristmasDiscountExecutor;
 import christmas.service.event.discount.executor.DiscountExecutor;
 import christmas.service.event.discount.executor.SpecialDayDiscountExecutor;
 import christmas.service.event.discount.executor.WeekDayDiscountExecutor;
-import christmas.service.event.discount.executor.WeekEndEventExecutor;
+import christmas.service.event.discount.executor.WeekEndDiscountExecutor;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class DiscountEventService {
         EnumMap<EventType, DiscountExecutor> discountExecutor = new EnumMap<>(EventType.class);
         discountExecutor.put(EventType.CHRISTMAS, new ChristmasDiscountExecutor());
         discountExecutor.put(EventType.WEEKDAY, new WeekDayDiscountExecutor());
-        discountExecutor.put(EventType.WEEKEND, new WeekEndEventExecutor());
+        discountExecutor.put(EventType.WEEKEND, new WeekEndDiscountExecutor());
         discountExecutor.put(EventType.SPECIAL, new SpecialDayDiscountExecutor());
         this.discountExecutor = discountExecutor;
     }
