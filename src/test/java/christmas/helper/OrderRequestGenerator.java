@@ -1,7 +1,7 @@
 package christmas.helper;
 
-import christmas.dto.OrderItemRequest;
-import christmas.dto.OrderRequest;
+import christmas.dto.request.OrderItemRequest;
+import christmas.dto.request.OrderRequest;
 import java.util.List;
 import java.util.stream.Stream;
 

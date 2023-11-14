@@ -16,7 +16,7 @@ class FreeGiftEventServiceTest {
     @ValueSource(ints = {119999})
     @DisplayName("총주문 금액이 12만원 미만이면 증정 상품이 없다.")
     void notExistFreeGift(int totalOrderPrice) {
-        Optional<FreeGift> freeGift = freeGiftEventService.applyGiftEvent(totalOrderPrice);
+        Optional<FreeGift> freeGift = freeGiftEventService.calculateGiftEvent(totalOrderPrice);
         Assertions.assertThat(freeGift).isEmpty();
     }
 
@@ -24,7 +24,7 @@ class FreeGiftEventServiceTest {
     @ValueSource(ints = {120000, 131313, 123456})
     @DisplayName("총주문 금액이 12만원 이상이면 증정 상품이 있다.")
     void existFreeGift(int totalOrderPrice) {
-        Optional<FreeGift> freeGift = freeGiftEventService.applyGiftEvent(totalOrderPrice);
+        Optional<FreeGift> freeGift = freeGiftEventService.calculateGiftEvent(totalOrderPrice);
         Assertions.assertThat(freeGift).isPresent();
         Assertions.assertThat(freeGift.get().getGiftName()).isEqualTo(Menu.CHAMPAGNE.getName());
         Assertions.assertThat(freeGift.get().getCount()).isEqualTo(1);

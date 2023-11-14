@@ -1,7 +1,7 @@
 package christmas.service.event.discount;
 
-import christmas.domain.DiscountInformation;
 import christmas.domain.EventType;
+import christmas.domain.event.DiscountInformation;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItem;
 import java.util.List;
@@ -23,7 +23,7 @@ class DiscountEventServiceTest {
         Order order = createOrder(day);
         int expectedDiscountAmount = -14161;
         // when
-        DiscountInformation discountInformation = discountEventService.applyDiscountEvent(order);
+        DiscountInformation discountInformation = discountEventService.calculateDiscountEvent(order);
         // then
         Assertions.assertThat(discountInformation.getDiscountAmount(EventType.WEEKDAY))
                 .isEqualTo(expectedDiscountAmount);
@@ -47,7 +47,7 @@ class DiscountEventServiceTest {
         int expectedChristmasDiscount = EventType.CHRISTMAS.calculateDiscountAmount(day, day);
         int expectedTotalDiscount = expectedWeekDayDiscount + expectedChristmasDiscount;
         // when
-        DiscountInformation discountInformation = discountEventService.applyDiscountEvent(order);
+        DiscountInformation discountInformation = discountEventService.calculateDiscountEvent(order);
         // then
         Assertions.assertThat(discountInformation.getDiscountAmount(EventType.WEEKDAY))
                 .isEqualTo(expectedWeekDayDiscount);
@@ -71,7 +71,7 @@ class DiscountEventServiceTest {
         int expectedSpecialDayDiscount = -1000;
         int expectedTotalDiscount = expectedWeekDayDiscount + expectedChristmasDiscount + expectedSpecialDayDiscount;
         // when
-        DiscountInformation discountInformation = discountEventService.applyDiscountEvent(order);
+        DiscountInformation discountInformation = discountEventService.calculateDiscountEvent(order);
         // then
         Assertions.assertThat(discountInformation.getDiscountAmount(EventType.WEEKDAY))
                 .isEqualTo(expectedWeekDayDiscount);
@@ -94,7 +94,7 @@ class DiscountEventServiceTest {
         int expectedSpecialDayDiscount = -1000;
         int expectedTotalDiscount = expectedWeekDayDiscount + expectedSpecialDayDiscount;
         // when
-        DiscountInformation discountInformation = discountEventService.applyDiscountEvent(order);
+        DiscountInformation discountInformation = discountEventService.calculateDiscountEvent(order);
         // then
         Assertions.assertThat(discountInformation.getDiscountAmount(EventType.WEEKDAY))
                 .isEqualTo(expectedWeekDayDiscount);
@@ -115,7 +115,7 @@ class DiscountEventServiceTest {
         Order order = createOrder(day);
         int expectedWeekendDiscount = -18207;
         // when
-        DiscountInformation discountInformation = discountEventService.applyDiscountEvent(order);
+        DiscountInformation discountInformation = discountEventService.calculateDiscountEvent(order);
         // then
         Assertions.assertThat(discountInformation.getDiscountAmount(EventType.WEEKEND))
                 .isEqualTo(expectedWeekendDiscount);
@@ -138,7 +138,7 @@ class DiscountEventServiceTest {
         int expectedChristmasAmount = EventType.CHRISTMAS.calculateDiscountAmount(day, day);
         int expectedTotalDiscount = expectedWeekendDiscount + expectedChristmasAmount;
         // when
-        DiscountInformation discountInformation = discountEventService.applyDiscountEvent(order);
+        DiscountInformation discountInformation = discountEventService.calculateDiscountEvent(order);
         // then
         Assertions.assertThat(discountInformation.getDiscountAmount(EventType.WEEKEND))
                 .isEqualTo(expectedWeekendDiscount);
@@ -157,7 +157,7 @@ class DiscountEventServiceTest {
         // given
         Order order = new Order(List.of(new OrderItem("타파스", 1), new OrderItem("제로콜라", 1)), 26);
         // when
-        DiscountInformation discountInformation = discountEventService.applyDiscountEvent(order);
+        DiscountInformation discountInformation = discountEventService.calculateDiscountEvent(order);
         // then
         Assertions.assertThat(discountInformation.getDiscountAmount(EventType.WEEKEND))
                 .isZero();
@@ -178,7 +178,7 @@ class DiscountEventServiceTest {
                 new OrderItem("초코케이크", 2), new OrderItem("제로콜라", 1)), 3);
         int expectedTotalDiscount = -6246;
         // when
-        DiscountInformation discountInformation = discountEventService.applyDiscountEvent(order);
+        DiscountInformation discountInformation = discountEventService.calculateDiscountEvent(order);
         // then
         Assertions.assertThat(discountInformation.getDiscountAmount(EventType.CHRISTMAS))
                 .isEqualTo(-1200);

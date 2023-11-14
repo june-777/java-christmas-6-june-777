@@ -2,9 +2,9 @@ package christmas.domain;
 
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItem;
-import christmas.dto.OrderRequest;
-import christmas.dto.OrderRequestMapper;
-import christmas.service.OrderService;
+import christmas.dto.request.OrderRequest;
+import christmas.service.order.OrderService;
+import christmas.utils.mapper.OrderRequestMapper;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
