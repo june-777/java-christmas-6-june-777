@@ -8,6 +8,7 @@ public class OrderDay {
     private final int day;
 
     public OrderDay(int day) {
+        validate(day);
         this.day = day;
     }
 
@@ -19,5 +20,10 @@ public class OrderDay {
 
     public int getDay() {
         return day;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(day);
     }
 }

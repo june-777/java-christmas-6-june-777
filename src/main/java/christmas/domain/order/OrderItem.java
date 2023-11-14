@@ -56,4 +56,9 @@ public class OrderItem {
     public int getCount() {
         return count;
     }
+
+    @Override
+    public String toString() {
+        return "(" + menu.getName() + "," + count + ")";
+    }
 }
