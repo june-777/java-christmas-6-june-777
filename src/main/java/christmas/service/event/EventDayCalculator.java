@@ -1,6 +1,7 @@
 package christmas.service.event;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class EventDayCalculator {
@@ -12,6 +13,13 @@ public class EventDayCalculator {
     private static final int FIRST_WEEK_SATURDAY = 2;
     private static final int DECEMBER_LAST_DAY = 31;
     private static final int DAY_OF_WEEK = 7;
+
+    private static final int SPECIAL_FIRST_DAY = 3;
+    private static final int SPECIAL_SECOND_DAY = 10;
+    private static final int SPECIAL_THIRD_DAY = 17;
+    private static final int SPECIAL_FOURTH_DAY = 24;
+    private static final int SPECIAL_FIFTH_DAY = 25;
+    private static final int SPECIAL_SIXTH_DAY = 31;
 
 
     public static List<Integer> christmasDay() {
@@ -36,6 +44,11 @@ public class EventDayCalculator {
             days.add(saturday);
         }
         return days;
+    }
+
+    public static List<Integer> specialDay() {
+        return Arrays.asList(SPECIAL_FIRST_DAY, SPECIAL_SECOND_DAY, SPECIAL_THIRD_DAY,
+                SPECIAL_FOURTH_DAY, SPECIAL_FIFTH_DAY, SPECIAL_SIXTH_DAY);
     }
 
     private static List<Integer> allDay() {
