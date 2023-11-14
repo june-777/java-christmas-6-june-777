@@ -22,12 +22,26 @@ public class EventDayCalculator {
         return days;
     }
 
+    public static List<Integer> weekDay() {
+        List<Integer> allDay = allDay();
+        allDay.removeAll(weekEnd());
+        return allDay;
+    }
+
     public static List<Integer> weekEnd() {
         List<Integer> days = new ArrayList<>();
         for (int friday = FIRST_WEEK_FRIDAY, saturday = FIRST_WEEK_SATURDAY; saturday <= DECEMBER_LAST_DAY;
              friday += DAY_OF_WEEK, saturday += DAY_OF_WEEK) {
             days.add(friday);
             days.add(saturday);
+        }
+        return days;
+    }
+
+    private static List<Integer> allDay() {
+        List<Integer> days = new ArrayList<>();
+        for (int day = 1; day <= 31; day++) {
+            days.add(day);
         }
         return days;
     }
