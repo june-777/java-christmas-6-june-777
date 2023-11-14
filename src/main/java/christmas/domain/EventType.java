@@ -11,7 +11,10 @@ public enum EventType {
         final int discountAmountUnit = 100;
         return basicDiscountAmount + discountAmountUnit * (orderDay - 1);
     }),
-    WEEKDAY(EventDayCalculator.weekDay(), todo -> todo),
+    WEEKDAY(EventDayCalculator.weekDay(), dessertCount -> {
+        final int discountAmountUnit = 2023;
+        return discountAmountUnit * dessertCount;
+    }),
     WEEKEND(EventDayCalculator.weekEnd(), todo -> todo),
     SPECIAL(EventDayCalculator.specialDay(), todo -> todo);
 
