@@ -24,6 +24,8 @@ public class OutputView {
     private static final String FREE_GIFT = "증정 이벤트";
     private static final String BENEFIT_MESSAGE = "\n<혜택 내역>";
     private static final String BENEFIT_RESULT_FORM = "%s: %s";
+
+    private static final String TOTAL_BENEFIT_PRICE_MESSAGE = "\n<총혜택 금액>";
     private static final String NOTHING = "없음";
 
     public void printStartMessage() {
@@ -81,5 +83,11 @@ public class OutputView {
         }
         System.out.printf(BENEFIT_RESULT_FORM, FREE_GIFT,
                 PRICE_FORMAT.format(freeGiftResponse.getBenefitPrice()));
+    }
+
+    public void printTotalBenefitPrice(DiscountResponse discountResponse, FreeGiftResponse freeGiftResponse) {
+        System.out.println(TOTAL_BENEFIT_PRICE_MESSAGE);
+        int totalBenefitPrice = discountResponse.getTotalDiscountAmount() + freeGiftResponse.getBenefitPrice();
+        System.out.printf(PRICE_FORMAT.format(totalBenefitPrice));
     }
 }
