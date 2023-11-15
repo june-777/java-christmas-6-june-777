@@ -53,7 +53,7 @@ public class FrontController {
     }
 
     private void renderingPreview(OrderDay orderDay, OrderResponse orderResponse) {
-        outputView.printPreviewEvent(orderDay.getDay());
+        outputView.printPreviewEventMessage(orderDay.getDay());
         outputView.printOrderMenu(orderResponse);
         outputView.printTotalOrderAmount(orderResponse);
     }
