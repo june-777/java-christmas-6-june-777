@@ -1,6 +1,7 @@
 package christmas.view.validator;
 
 import christmas.view.exception.InputDateBlankException;
+import christmas.view.exception.InputDateNotIntegerException;
 import christmas.view.exception.InputDateNotNumericException;
 import java.util.regex.Pattern;
 
@@ -11,6 +12,7 @@ public class DateInputValidator {
     public static void validate(String target) {
         validateBlank(target);
         validateNumeric(target);
+        validateInteger(target);
     }
 
     private static void validateBlank(String target) {
@@ -25,4 +27,11 @@ public class DateInputValidator {
         }
     }
 
+    private static void validateInteger(String target) {
+        try {
+            Integer.parseInt(target);
+        } catch (NumberFormatException e) {
+            throw new InputDateNotIntegerException();
+        }
+    }
 }
