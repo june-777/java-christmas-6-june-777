@@ -1,9 +1,11 @@
 package christmas.view;
 
+import christmas.dto.response.DiscountResponse;
 import christmas.dto.response.FreeGiftResponse;
 import christmas.dto.response.OrderItemResponse;
 import christmas.dto.response.OrderResponse;
 import java.text.DecimalFormat;
+import java.util.Map.Entry;
 
 public class OutputView {
 
@@ -18,6 +20,10 @@ public class OutputView {
 
     private static final String FREE_GIFT_MESSAGE = "\n<증정 메뉴>";
     private static final String FREE_GIFT_RESULT_FORM = "%s %d개\n";
+
+    private static final String FREE_GIFT = "증정 이벤트";
+    private static final String BENEFIT_MESSAGE = "\n<혜택 내역>";
+    private static final String BENEFIT_RESULT_FORM = "%s: %s";
     private static final String NOTHING = "없음";
 
     public void printStartMessage() {
@@ -47,5 +53,33 @@ public class OutputView {
             return;
         }
         System.out.printf(FREE_GIFT_RESULT_FORM, freeGiftResponse.getName(), freeGiftResponse.getCount());
+    }
+
+    public void printBenefitResult(DiscountResponse discountResponse, FreeGiftResponse freeGiftResponse) {
+        System.out.println(BENEFIT_MESSAGE);
+        if (discountResponse.isEmpty() && freeGiftResponse.isEmpty()) {
+            System.out.println(NOTHING);
+            return;
+        }
+        printDiscountBenefit(discountResponse);
+        printFreeGiftBenefit(freeGiftResponse);
+    }
+
+    private void printDiscountBenefit(DiscountResponse discountResponse) {
+        if (discountResponse.isEmpty()) {
+            return;
+        }
+        for (Entry<String, Integer> eventNameAndDiscount : discountResponse.getEventNameAndDiscount().entrySet()) {
+            System.out.printf(BENEFIT_RESULT_FORM, eventNameAndDiscount.getKey(),
+                    PRICE_FORMAT.format(eventNameAndDiscount.getValue()));
+        }
+    }
+
+    private void printFreeGiftBenefit(FreeGiftResponse freeGiftResponse) {
+        if (freeGiftResponse.isEmpty()) {
+            return;
+        }
+        System.out.printf(BENEFIT_RESULT_FORM, FREE_GIFT,
+                PRICE_FORMAT.format(freeGiftResponse.getBenefitPrice()));
     }
 }
