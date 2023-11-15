@@ -13,6 +13,7 @@ public class OutputView {
     private static final String ORDER_MENU_MESSAGE = "\n<주문 메뉴>";
     private static final String ORDER_MENU_RESULT_FORM = "%s %d개\n";
 
+    private static final String TOTAL_ORDER_AMOUNT_MESSAGE = "\n<할인 전 총주문 금액>";
 
     public void printStartMessage() {
         System.out.println(START_MESSAGE);
@@ -27,5 +28,10 @@ public class OutputView {
         for (OrderItemResponse orderItemResponse : orderResponse.getOrderItemResponses()) {
             System.out.printf(ORDER_MENU_RESULT_FORM, orderItemResponse.getMenuName(), orderItemResponse.getCount());
         }
+    }
+
+    public void printTotalOrderAmount(OrderResponse orderResponse) {
+        System.out.println(TOTAL_ORDER_AMOUNT_MESSAGE);
+        System.out.printf(PRICE_FORMAT.format(orderResponse.getTotalPrice()));
     }
 }
