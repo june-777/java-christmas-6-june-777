@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.dto.response.FreeGiftResponse;
 import christmas.dto.response.OrderItemResponse;
 import christmas.dto.response.OrderResponse;
 import java.text.DecimalFormat;
@@ -14,6 +15,10 @@ public class OutputView {
     private static final String ORDER_MENU_RESULT_FORM = "%s %d개\n";
 
     private static final String TOTAL_ORDER_AMOUNT_MESSAGE = "\n<할인 전 총주문 금액>";
+
+    private static final String FREE_GIFT_MESSAGE = "\n<증정 메뉴>";
+    private static final String FREE_GIFT_RESULT_FORM = "%s %d개\n";
+    private static final String NOTHING = "없음";
 
     public void printStartMessage() {
         System.out.println(START_MESSAGE);
@@ -33,5 +38,14 @@ public class OutputView {
     public void printTotalOrderAmount(OrderResponse orderResponse) {
         System.out.println(TOTAL_ORDER_AMOUNT_MESSAGE);
         System.out.printf(PRICE_FORMAT.format(orderResponse.getTotalPrice()));
+    }
+
+    public void printFreeGiftResult(FreeGiftResponse freeGiftResponse) {
+        System.out.println(FREE_GIFT_MESSAGE);
+        if (freeGiftResponse.isEmpty()) {
+            System.out.println(NOTHING);
+            return;
+        }
+        System.out.printf(FREE_GIFT_RESULT_FORM, freeGiftResponse.getName(), freeGiftResponse.getCount());
     }
 }
