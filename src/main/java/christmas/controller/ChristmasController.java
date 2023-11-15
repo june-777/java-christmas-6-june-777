@@ -4,6 +4,7 @@ import christmas.domain.Badge;
 import christmas.domain.event.DiscountInformation;
 import christmas.domain.event.FreeGift;
 import christmas.domain.order.Order;
+import christmas.domain.order.OrderDay;
 import christmas.dto.request.OrderRequest;
 import christmas.dto.response.BadgeResponse;
 import christmas.dto.response.DiscountResponse;
@@ -26,6 +27,10 @@ public class ChristmasController {
         this.orderService = orderService;
         this.eventService = eventService;
         this.badgeService = badgeService;
+    }
+
+    public OrderDay createOrderDay(int date) {
+        return new OrderDay(date);
     }
 
     public Order createOrder(OrderRequest orderRequest) {
