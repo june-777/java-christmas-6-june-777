@@ -171,12 +171,14 @@
 - [x] 3항 연산자를 쓰지 않는다
 - [x] 함수(또는 메서드)의 길이가 15라인을 넘어가지 않도록 구현한다.
     - [x] 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들어라.
-- [ ] JUnit5와 AssertJ를 이용하여 본인이 정리한 기능 목록이 정상 동작함을 테스트 코드로 확인한다
+- [x] JUnit5와 AssertJ를 이용하여 본인이 정리한 기능 목록이 정상 동작함을 테스트 코드로 확인한다.
+    - ![img.png](totaltestcoverage.png)
 - [x] else 예약어를 쓰지 않는다.
     - [x] switch/case도 허용하지 않는다.
-- [ ] 도메인 로직에 단위 테스트를 구현해야 한다.
+- [x] 도메인 로직에 단위 테스트를 구현해야 한다.
+    - ![img.png](domaintestcoverage.png)
     - [x] System.out, System.in, Scanner 로직은 제외한다.
-    - [x] 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 분리해 구현한다.
+    - [x] 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 분리해 구현한다.인
 - [x] 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException를 발생시킨다.
     - [x] "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
     - [x] `Exception`이 아닌 `IllegalArgumentException`, `IllegalStateException` 등과 같은 명확한 유형을 처리한다.
