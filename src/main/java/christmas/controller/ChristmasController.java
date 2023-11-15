@@ -29,30 +29,30 @@ public class ChristmasController {
         this.badgeService = badgeService;
     }
 
-    public OrderDay createOrderDay(int date) {
+    public OrderDay createOrderDay(final int date) {
         return new OrderDay(date);
     }
 
-    public Order createOrder(OrderRequest orderRequest) {
+    public Order createOrder(final OrderRequest orderRequest) {
         return orderService.createOrder(orderRequest);
     }
 
-    public DiscountResponse discountEvent(Order order) {
-        Optional<DiscountInformation> discountInformation = eventService.applyDiscountEvent(order);
+    public DiscountResponse discountEvent(final Order order) {
+        final Optional<DiscountInformation> discountInformation = eventService.applyDiscountEvent(order);
 
         return discountInformation.map(DiscountResponseMapper::of)
                 .orElseGet(DiscountResponseMapper::of);
     }
 
-    public FreeGiftResponse giftEvent(Order order) {
-        Optional<FreeGift> freeGift = eventService.applyFreeGiftEvent(order);
+    public FreeGiftResponse giftEvent(final Order order) {
+        final Optional<FreeGift> freeGift = eventService.applyFreeGiftEvent(order);
 
         return freeGift.map(FreeGiftResponseMapper::of)
                 .orElseGet(FreeGiftResponseMapper::of);
     }
 
-    public BadgeResponse badge(int totalDiscountAmount, int freeGiftPrice) {
-        Optional<Badge> badge = badgeService.applyBadge(totalDiscountAmount + freeGiftPrice);
+    public BadgeResponse badge(final int totalDiscountAmount, final int freeGiftPrice) {
+        final Optional<Badge> badge = badgeService.applyBadge(totalDiscountAmount + freeGiftPrice);
 
         return badge.map(BadgeResponseMapper::of)
                 .orElseGet(BadgeResponseMapper::of);

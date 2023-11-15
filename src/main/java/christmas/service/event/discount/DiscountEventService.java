@@ -24,13 +24,15 @@ public class DiscountEventService {
         this.discountExecutor = discountExecutor;
     }
 
-    public DiscountInformation calculateDiscountEvent(Order order) {
+    public DiscountInformation calculateDiscountEvent(final Order order) {
         List<EventType> applicableEventTypes = EventType.getApplicableEventTypes(order.getDay());
         EnumMap<EventType, Integer> discounts = updateEachEventDiscount(order, applicableEventTypes);
         return new DiscountInformation(discounts);
     }
 
-    private EnumMap<EventType, Integer> updateEachEventDiscount(Order order, List<EventType> applicableEventTypes) {
+    private EnumMap<EventType, Integer> updateEachEventDiscount(final Order order,
+                                                                final List<EventType> applicableEventTypes
+    ) {
         EnumMap<EventType, Integer> discounts = new EnumMap<>(EventType.class);
         for (EventType eventType : applicableEventTypes) {
             DiscountExecutor executor = discountExecutor.get(eventType);

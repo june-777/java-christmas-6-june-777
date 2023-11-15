@@ -18,21 +18,21 @@ public class EventService {
         this.freeGiftEventService = freeGiftEventService;
     }
 
-    public Optional<DiscountInformation> applyDiscountEvent(Order order) {
+    public Optional<DiscountInformation> applyDiscountEvent(final Order order) {
         if (cantApplyEvent(order)) {
             return Optional.empty();
         }
         return Optional.of(discountEventService.calculateDiscountEvent(order));
     }
 
-    public Optional<FreeGift> applyFreeGiftEvent(Order order) {
+    public Optional<FreeGift> applyFreeGiftEvent(final Order order) {
         if (cantApplyEvent(order)) {
             return Optional.empty();
         }
         return freeGiftEventService.calculateGiftEvent(order.getTotalOrderPrice());
     }
 
-    private boolean cantApplyEvent(Order order) {
+    private boolean cantApplyEvent(final Order order) {
         return order.getTotalOrderPrice() < APPLICABLE_MIN_TOTAL_PRICE;
     }
 }

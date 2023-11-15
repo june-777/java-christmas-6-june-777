@@ -9,12 +9,12 @@ import java.util.List;
 
 public class OrderService {
 
-    public Order createOrder(OrderRequest orderRequest) {
+    public Order createOrder(final OrderRequest orderRequest) {
         List<OrderItem> orderItem = createOrderItems(orderRequest.getOrderItems());
         return new Order(orderItem, orderRequest.getOrderDay());
     }
 
-    private List<OrderItem> createOrderItems(List<OrderItemRequest> orderItemRequests) {
+    private List<OrderItem> createOrderItems(final List<OrderItemRequest> orderItemRequests) {
         List<OrderItem> OrderItems = new ArrayList<>();
         for (OrderItemRequest orderItemRequest : orderItemRequests) {
             OrderItem orderItem = new OrderItem(orderItemRequest.getMenuName(), orderItemRequest.getOrderCount());
